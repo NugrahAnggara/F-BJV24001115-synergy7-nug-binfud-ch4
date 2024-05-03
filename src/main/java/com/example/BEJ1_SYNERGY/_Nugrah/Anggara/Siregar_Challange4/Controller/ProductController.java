@@ -5,6 +5,7 @@ import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Product
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.ProductService;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +37,10 @@ public class ProductController {
     public boolean deleteProduct(@PathVariable String id){
         UUID uuid = UUID.fromString(id);
         return productService.deleteProduct(uuid);
+    }
+
+    @GetMapping(path = "/product-pagination")
+    Page<Product> getProductPagination(@RequestParam("start") String start, @RequestParam("size") String size){
+        return productService.getProductPagination(start,size);
     }
 }

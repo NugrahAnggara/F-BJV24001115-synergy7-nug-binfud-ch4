@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Page<Product> getProductPagination(String i,String e) {
+    public Page<Product> getProductPagination(String i, String e) {
         int init = Integer.parseInt(i);
         int end = Integer.parseInt(e);
         return productRepository.findAll(PageRequest.of(init,end));

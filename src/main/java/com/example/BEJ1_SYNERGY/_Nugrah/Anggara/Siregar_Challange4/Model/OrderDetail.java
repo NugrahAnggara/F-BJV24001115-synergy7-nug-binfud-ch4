@@ -18,11 +18,9 @@ public class OrderDetail {
     @ManyToOne(targetEntity = Order.class)
     @JoinColumn(name = "id_order")
     private Order order;
-
     @ManyToOne(targetEntity = Product.class)
     @JoinColumn(name = "id_product")
     private Product product;
-
     private int quantity;
     private double total_price;
 

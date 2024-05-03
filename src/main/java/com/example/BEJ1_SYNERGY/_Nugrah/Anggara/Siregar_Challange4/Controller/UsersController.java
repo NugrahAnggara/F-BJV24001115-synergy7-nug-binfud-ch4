@@ -1,6 +1,8 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Controller;
 
 
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.User.UserRequest;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.User.UserResponse;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Users;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,8 @@ public class UsersController {
     UserService userService;
 
     @PostMapping(path = "/registrasi")
-    public Users addUser(@ModelAttribute Users user){
-        return userService.addUser(user);
+    public UserResponse addUser(@ModelAttribute UserRequest user){
+        return userService.addUser(user.getUsername(),user.getEmail(),user.getPassword());
     }
 
     @PutMapping(path = "/user/{id}")
