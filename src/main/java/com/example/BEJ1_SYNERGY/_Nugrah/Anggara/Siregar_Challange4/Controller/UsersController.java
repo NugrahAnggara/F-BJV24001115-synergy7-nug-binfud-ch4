@@ -4,7 +4,6 @@ package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Controller;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Users;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 

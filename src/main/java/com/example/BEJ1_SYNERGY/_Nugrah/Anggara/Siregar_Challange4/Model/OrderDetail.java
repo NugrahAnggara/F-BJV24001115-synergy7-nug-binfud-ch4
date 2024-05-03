@@ -14,6 +14,7 @@ public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @ManyToOne(targetEntity = Order.class)
     @JoinColumn(name = "id_order")
     private Order order;
