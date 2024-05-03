@@ -15,12 +15,12 @@ public class UsersController {
     @Autowired
     UserService userService;
 
-    @PostMapping(path = "/user",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(path = "/registrasi")
     public Users addUser(@ModelAttribute Users user){
         return userService.addUser(user);
     }
 
-    @PutMapping(path = "/user/{id}",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(path = "/user/{id}")
     public Users updateUser(@ModelAttribute Users user,@PathVariable("id") UUID id){
         return userService.updateUser(user,id);
     }

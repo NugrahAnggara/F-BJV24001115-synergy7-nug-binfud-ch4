@@ -1,20 +1,19 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Accessors(chain = true)
 @Table(name = "product")
-public class Product {
+public class Product{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -22,11 +21,7 @@ public class Product {
     private String product_name;
     private double price;
 
-    @ManyToOne(targetEntity = Merchant.class)
+    @ManyToOne
     @JoinColumn(name = "id_merchant")
     private Merchant merchant;
-
-    @OneToOne(mappedBy = "product",cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_order_detail")
-    private OrderDetail orderDetail;
 }
