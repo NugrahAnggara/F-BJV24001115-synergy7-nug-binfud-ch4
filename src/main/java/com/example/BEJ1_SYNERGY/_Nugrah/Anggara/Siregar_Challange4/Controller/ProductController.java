@@ -3,11 +3,8 @@ package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Controller;
 
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Product;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.ProductService;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;

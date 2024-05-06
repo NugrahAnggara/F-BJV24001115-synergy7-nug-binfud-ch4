@@ -15,7 +15,6 @@ public class MerchantController {
     @Autowired
     MerchantService merchantService;
 
-
     @GetMapping(path = "/open-merchant")
     public List<Merchant> getMerchant(){
         return merchantService.getOpenMerchant();
@@ -30,7 +29,7 @@ public class MerchantController {
     }
 
     @PostMapping(path = "/daftar-merchant")
-    public Merchant addMerchant(@ModelAttribute Merchant merchant){
+    public Merchant addMerchant(@RequestBody Merchant merchant){
         return merchantService.addingMerchant(merchant);
     }
 }

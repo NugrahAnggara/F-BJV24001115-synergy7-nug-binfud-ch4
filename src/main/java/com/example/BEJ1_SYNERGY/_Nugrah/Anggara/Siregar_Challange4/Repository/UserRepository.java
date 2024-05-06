@@ -13,10 +13,8 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<Users, UUID> {
 
     @Modifying
-    @Query(value = "CALL createUser(:username, :email_address, :passwords)", nativeQuery = true)
-    void registrationUser(@Param("username") String username,
-                          @Param("email_address") String email,
-                          @Param("passwords") String password);
+    @Query(value = "CALL createUser(?1, ?2, ?3)", nativeQuery = true)
+    void registrationUser(String username, String email, String password);
 
     @Query(value = "select * from users where users.username = :username",nativeQuery = true)
     Users findByUsername(@Param("username") String username);

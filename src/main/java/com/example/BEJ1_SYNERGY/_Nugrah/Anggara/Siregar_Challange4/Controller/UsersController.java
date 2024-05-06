@@ -17,12 +17,12 @@ public class UsersController {
     UserService userService;
 
     @PostMapping(path = "/registrasi")
-    public UserResponse addUser(@ModelAttribute UserRequest user){
+    public UserResponse addUser(@RequestBody UserRequest user){
         return userService.addUser(user.getUsername(),user.getEmail(),user.getPassword());
     }
 
     @PutMapping(path = "/user/{id}")
-    public Users updateUser(@ModelAttribute Users user,@PathVariable("id") UUID id){
+    public Users updateUser(@RequestBody Users user,@PathVariable("id") UUID id){
         return userService.updateUser(user,id);
     }
 

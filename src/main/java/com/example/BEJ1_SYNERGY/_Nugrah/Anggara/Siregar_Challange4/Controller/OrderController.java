@@ -33,8 +33,8 @@ public class OrderController {
     @Autowired
     ProductRepository productRepository;
 
-    @PostMapping(value = "/add",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public Order addOrder(@ModelAttribute OrderRequest orderRequest) throws ParseException {
+    @PostMapping(value = "/add")
+    public Order addOrder(@RequestBody OrderRequest orderRequest) throws ParseException {
 
         Optional<Users> user = userRepository.findById(UUID.fromString(orderRequest.getIdUser()));
         Optional<Product> product = productRepository.findById(UUID.fromString(orderRequest.getIdProduct()));
@@ -47,6 +47,5 @@ public class OrderController {
     List<OrderDetail> getOrder(@PathVariable String id){
         return orderService.getOrderDetail(id);
     }
-
 
 }
