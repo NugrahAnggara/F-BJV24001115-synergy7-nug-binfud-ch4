@@ -1,5 +1,6 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +16,12 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Order.class)
     @JoinColumn(name = "id_order")
     private Order order;
+
+    @JsonIgnore
     @ManyToOne(targetEntity = Product.class)
     @JoinColumn(name = "id_product")
     private Product product;

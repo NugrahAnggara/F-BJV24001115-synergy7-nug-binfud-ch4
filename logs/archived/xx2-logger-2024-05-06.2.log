@@ -1,0 +1,37 @@
+2024-05-06 21:47:19,606 INFO c.e.B._.A.S.S.MerchantServiceImpl [http-nio-8082-exec-4] data merchant 
+2024-05-06 21:59:40,574 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-06 21:59:40,590 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-05-06 21:59:40,618 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-05-06 21:59:47,889 INFO o.s.b.StartupInfoLogger [main] Starting Bej1Synergy7NugrahAnggaraSiregarChallange4Application using Java 19.0.2 with PID 11336 (C:\Users\User\Desktop\BEJ1_SYNERGY-7_Nugrah-Anggara-Siregar_Challange-4\target\classes started by User in C:\Users\User\Desktop\BEJ1_SYNERGY-7_Nugrah-Anggara-Siregar_Challange-4)
+2024-05-06 21:59:47,894 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-05-06 21:59:49,527 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-06 21:59:49,702 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 159 ms. Found 5 JPA repository interfaces.
+2024-05-06 21:59:51,046 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8082 (http)
+2024-05-06 21:59:51,063 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8082"]
+2024-05-06 21:59:51,067 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-05-06 21:59:51,068 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.20]
+2024-05-06 21:59:51,170 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-05-06 21:59:51,172 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 3108 ms
+2024-05-06 21:59:51,626 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-06 21:59:51,757 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-05-06 21:59:51,833 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-05-06 21:59:52,286 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-06 21:59:52,318 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-05-06 21:59:52,681 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5ce3409b
+2024-05-06 21:59:52,684 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-05-06 21:59:52,746 WARN o.h.e.j.d.i.DialectFactoryImpl [main] HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-05-06 21:59:54,525 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-06 21:59:54,643 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-06 21:59:55,544 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-05-06 21:59:55,859 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-06 21:59:56,604 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8082"]
+2024-05-06 21:59:56,628 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8082 (http) with context path ''
+2024-05-06 21:59:56,643 INFO o.s.b.StartupInfoLogger [main] Started Bej1Synergy7NugrahAnggaraSiregarChallange4Application in 9.502 seconds (process running for 10.574)
+2024-05-06 22:00:52,855 INFO o.a.j.l.DirectJDKLog [http-nio-8082-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-06 22:00:52,856 INFO o.s.w.s.FrameworkServlet [http-nio-8082-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-05-06 22:00:52,858 INFO o.s.w.s.FrameworkServlet [http-nio-8082-exec-1] Completed initialization in 2 ms
+2024-05-06 22:03:59,689 WARN o.s.w.s.m.s.DefaultHandlerExceptionResolver [http-nio-8082-exec-7] Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Infinite recursion (StackOverflowError)
+2024-05-06 22:03:59,691 WARN o.s.w.s.h.AbstractHandlerExceptionResolver [http-nio-8082-exec-7] Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Infinite recursion (StackOverflowError)]
+2024-05-06 22:14:19,010 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-06 22:14:19,014 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-05-06 22:14:19,027 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.

@@ -1,5 +1,6 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service;
 
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.OrderResponse;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Order;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.OrderDetail;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Product;
@@ -26,7 +27,7 @@ public class OrderServiceImpl implements OrderService{
     OrderDetailRepository orderDetailRepository;
 
     @Override
-    public Order createOrder(Users user, Product product, String address, int quantity) throws ParseException {
+    public OrderResponse createOrder(Users user, Product product, String address, int quantity) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         Order dataOrder = new Order();
@@ -44,7 +45,15 @@ public class OrderServiceImpl implements OrderService{
 
         orderDetailRepository.save(orderDetail);
         order.setCompleted(true);
-        return orderRepository.save(order);
+        Order data = orderRepository.save(order);
+
+        OrderResponse orderResponse = new OrderResponse();
+        orderResponse.setId(data.getId());
+        orderResponse.setOrder_time(data.getOrder_time());
+        orderResponse.setDestination_address(data.getDestination_address());
+        orderResponse.setUser_id(data.getUser().getId());
+        orderResponse.setCompleted(data.isCompleted());
+        return orderResponse;
     }
 
     @Override
