@@ -1,10 +1,10 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service;
 
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.OrderResponse;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderResponseDto;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Order;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.OrderDetail;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Product;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Users;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.User;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.OrderDetailRepository;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService{
     OrderDetailRepository orderDetailRepository;
 
     @Override
-    public OrderResponse createOrder(Users user, Product product, String address, int quantity) throws ParseException {
+    public OrderResponseDto createOrder(User user, Product product, String address, int quantity) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         Order dataOrder = new Order();
@@ -47,13 +47,13 @@ public class OrderServiceImpl implements OrderService{
         order.setCompleted(true);
         Order data = orderRepository.save(order);
 
-        OrderResponse orderResponse = new OrderResponse();
-        orderResponse.setId(data.getId());
-        orderResponse.setOrder_time(data.getOrder_time());
-        orderResponse.setDestination_address(data.getDestination_address());
-        orderResponse.setUser_id(data.getUser().getId());
-        orderResponse.setCompleted(data.isCompleted());
-        return orderResponse;
+        OrderResponseDto orderResponseDto = new OrderResponseDto();
+        orderResponseDto.setId(data.getId());
+        orderResponseDto.setOrder_time(data.getOrder_time());
+        orderResponseDto.setDestination_address(data.getDestination_address());
+        orderResponseDto.setUser_id(data.getUser().getId());
+        orderResponseDto.setCompleted(data.isCompleted());
+        return orderResponseDto;
     }
 
     @Override

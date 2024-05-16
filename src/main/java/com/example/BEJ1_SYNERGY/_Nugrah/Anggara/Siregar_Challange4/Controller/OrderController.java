@@ -1,19 +1,17 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Controller;
 
 
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.OrderRequest;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.OrderResponse;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Order;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderRequestDto;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderResponseDto;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.OrderDetail;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Product;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Users;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.User;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.ProductRepository;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.UserRepository;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -35,12 +33,12 @@ public class OrderController {
     ProductRepository productRepository;
 
     @PostMapping(value = "/add")
-    public OrderResponse addOrder(@RequestBody OrderRequest orderRequest) throws ParseException {
+    public OrderResponseDto addOrder(@RequestBody OrderRequestDto orderRequestDto) throws ParseException {
 
-        Optional<Users> user = userRepository.findById(UUID.fromString(orderRequest.getIdUser()));
-        Optional<Product> product = productRepository.findById(UUID.fromString(orderRequest.getIdProduct()));
+        Optional<User> user = userRepository.findById(UUID.fromString(orderRequestDto.getIdUser()));
+        Optional<Product> product = productRepository.findById(UUID.fromString(orderRequestDto.getIdProduct()));
 
-        return orderService.createOrder(user.get(),product.get(),orderRequest.getAddress(),orderRequest.getQuantity());
+        return orderService.createOrder(user.get(),product.get(), orderRequestDto.getAddress(), orderRequestDto.getQuantity());
     }
 
     @GetMapping(path = "/detail/{id}")
