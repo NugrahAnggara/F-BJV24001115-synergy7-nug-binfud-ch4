@@ -1,43 +1,77 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service;
 
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.User.UserResponse;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Users;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.User.UserRequestDto;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.User.UserResponseDto;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.User;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.UserRepository;
-import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    @Transactional
+    @Autowired
+    private ModelMapper mapper;
+
     @Override
-    public UserResponse addUser(String username, String email, String password) {
-        userRepository.registrationUser(username,email,password);
-        UserResponse userResponse = new UserResponse();
-        userResponse.setUsername(username);
-        userResponse.setEmail(email);
-        userResponse.setPassword(password);
-        return userResponse;
+    public User getUserById(UUID userID) {
+        Optional<User> dataUser = userRepository.findById(userID);
+        return dataUser.orElse(null);
+    }
+
+
+    @Override
+    public UserResponseDto addUser(UserRequestDto userRequestDto) {
+        User user = userRepository.registrationUser(userRequestDto.getUsername(),
+                userRequestDto.getEmail(),
+                userRequestDto.getPassword()
+                );
+
+        return this.mapper.map(user, UserResponseDto.class);
     }
 
     @Override
-    public Users updateUser(Users user, UUID id) {
-        Optional<Users> users = userRepository.findById(id);
-        users.get().setUsername(user.getUsername());
-        users.get().setPassword(user.getPassword());
-        users.get().setEmail_address(user.getEmail_address());
+    public Map<String,Object> updateUser(UserRequestDto userRequestDto, UUID id) {
+        Map<String,Object> body = new HashMap<>();
+        User user = new User();
 
-        return userRepository.save(users.get());
+        Optional<User> data = userRepository.findById(id);
+
+        if (data.isEmpty()){
+            body.put("statuscode", HttpStatus.NOT_FOUND.value());
+            body.put("message", HttpStatus.NOT_FOUND.getReasonPhrase());
+            body.put("data",null);
+            return body;
+        }
+
+        user.setId(id)
+                .setUsername(userRequestDto.getUsername())
+                .setPassword(userRequestDto.getPassword())
+                .setEmail_address(userRequestDto.getEmail());
+
+        User updateData = userRepository.save(user);
+
+        body.put("statuscode", HttpStatus.OK.value());
+        body.put("message", HttpStatus.OK.getReasonPhrase());
+        body.put("data",this.mapper.map(updateData, UserResponseDto.class));
+        return body;
     }
 
     @Override
-    public void deleteUser(UUID id) {
+    public Map<String,Object> deleteUser(UUID id) {
+        Map<String,Object> body = new HashMap<>();
         userRepository.deleteById(id);
+        body.put("statuscode",HttpStatus.OK.value());
+        body.put("message",HttpStatus.OK.getReasonPhrase());
+        return body;
     }
 }

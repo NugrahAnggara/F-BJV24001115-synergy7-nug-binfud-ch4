@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -18,8 +16,11 @@ public class Product{
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String product_name;
+    @Column(name = "product_name")
+    private String productName;
+
     private double price;
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "id_merchant")

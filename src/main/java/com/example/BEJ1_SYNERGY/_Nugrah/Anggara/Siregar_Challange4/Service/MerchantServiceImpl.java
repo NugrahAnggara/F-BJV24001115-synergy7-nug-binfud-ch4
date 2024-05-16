@@ -16,7 +16,7 @@ import java.util.UUID;
 public class MerchantServiceImpl implements MerchantService{
     @Autowired
     MerchantRepository merchantRepository;
-    private Logger LOG = LoggerFactory.getLogger(MerchantServiceImpl.class);
+    private final Logger LOG = LoggerFactory.getLogger(MerchantServiceImpl.class);
     @Override
     public Merchant addingMerchant(Merchant merchant) {
         return merchantRepository.save(merchant);
@@ -27,7 +27,7 @@ public class MerchantServiceImpl implements MerchantService{
         Merchant merchant = getMerchantById(id);
         if (merchant == null){
             LOG.error(id + " Not Found");
-            throw new NotFoundException(id);
+            return null;
         }
 
         merchant.setOpen(status);

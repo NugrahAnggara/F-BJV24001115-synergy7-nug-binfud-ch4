@@ -1,9 +1,10 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service;
 
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderResponseDto;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Order;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.OrderDetail;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Product;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Users;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.User;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.OrderDetailRepository;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class OrderServiceImpl implements OrderService{
     OrderDetailRepository orderDetailRepository;
 
     @Override
-    public Order createOrder(Users user, Product product, String address, int quantity) throws ParseException {
+    public OrderResponseDto createOrder(User user, Product product, String address, int quantity) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         Order dataOrder = new Order();
@@ -44,7 +45,15 @@ public class OrderServiceImpl implements OrderService{
 
         orderDetailRepository.save(orderDetail);
         order.setCompleted(true);
-        return orderRepository.save(order);
+        Order data = orderRepository.save(order);
+
+        OrderResponseDto orderResponseDto = new OrderResponseDto();
+        orderResponseDto.setId(data.getId());
+        orderResponseDto.setOrder_time(data.getOrder_time());
+        orderResponseDto.setDestination_address(data.getDestination_address());
+        orderResponseDto.setUser_id(data.getUser().getId());
+        orderResponseDto.setCompleted(data.isCompleted());
+        return orderResponseDto;
     }
 
     @Override

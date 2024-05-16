@@ -1,4 +1,4 @@
-package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.DTO.User;
+package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.User;
 
 
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Data
-public class UserRequest {
+public class UserRequestDto {
     private String username;
     private String email;
     private String password;
