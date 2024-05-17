@@ -37,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "/product-pagination")
-    Page<Product> getProductPagination(@RequestParam("start") String start, @RequestParam("size") String size){
-        return productService.getProductPagination(start,size);
+    Page<Product> getProductPagination(@RequestParam("start") String start, @RequestParam("size") String end){
+        return productService.getProductPagination(start,end);
     }
 }

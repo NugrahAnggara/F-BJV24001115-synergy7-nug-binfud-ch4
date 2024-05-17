@@ -1,5 +1,6 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service;
 
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderDetailResponseDto;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderResponseDto;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Order;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.OrderDetail;
@@ -10,16 +11,19 @@ import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.Or
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
@@ -57,13 +61,18 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<OrderDetail> getOrderDetail(String id) {
+    public List<OrderDetailResponseDto> getOrderDetail(String id) {
         UUID uuid = UUID.fromString(id);
-        Optional<List<OrderDetail>> orderDetail = Optional.ofNullable(orderDetailRepository.findByOrder(uuid));
-        if (orderDetail.isEmpty()){
-            return null;
+
+        List<OrderDetail> orderDetails = orderDetailRepository.findByOrder(uuid);
+        if (orderDetails == null || orderDetails.isEmpty()) {
+            return Collections.emptyList();
         }
 
-        return orderDetail.get();
+        return orderDetails.stream()
+                .map(order -> new OrderDetailResponseDto(order.getId(), order.getOrder().getOrder_time(),
+                        order.getProduct().getProductName(), order.getQuantity(), order.getTotal_price()))
+                .collect(Collectors.toList());
     }
 }
+

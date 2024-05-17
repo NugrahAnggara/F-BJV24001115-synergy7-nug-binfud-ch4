@@ -1,5 +1,7 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,5 +17,11 @@ public class Bej1Synergy7NugrahAnggaraSiregarChallange4Application {
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
+	}
+
+	@Bean
+	public OpenAPI customApi(){
+		return new OpenAPI().info(new Info().title("API BINARFUD")
+				.description("API BINARFUD Yang DIbuat Untuk Memenuhi Challange"));
 	}
 }

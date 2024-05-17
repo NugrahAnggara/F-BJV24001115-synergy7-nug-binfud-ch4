@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService{
             throw new ProductException("Product Tidak Ditemukan");
         }
 
-        productOld.setProduct_name(product.getProduct_name())
+        productOld.setProductName(product.getProductName())
                 .setMerchant(product.getMerchant())
                 .setPrice(product.getPrice());
 
