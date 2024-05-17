@@ -20,7 +20,6 @@ public class Product{
     private String productName;
 
     private double price;
-    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "id_merchant")

@@ -1,7 +1,7 @@
 package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service;
 
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.User.UserRequestDto;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.User.UserResponseDto;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.UserRequestDto;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.UserResponseDto;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.User;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -31,10 +31,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserResponseDto addUser(UserRequestDto userRequestDto) {
-        User user = userRepository.registrationUser(userRequestDto.getUsername(),
-                userRequestDto.getEmail(),
-                userRequestDto.getPassword()
-                );
+        User dataUser = new User();
+        dataUser.setUsername(userRequestDto.getUsername());
+        dataUser.setEmail_address(userRequestDto.getEmail());
+        dataUser.setPassword(userRequestDto.getPassword());
+        User user = userRepository.save(dataUser);
 
         return this.mapper.map(user, UserResponseDto.class);
     }

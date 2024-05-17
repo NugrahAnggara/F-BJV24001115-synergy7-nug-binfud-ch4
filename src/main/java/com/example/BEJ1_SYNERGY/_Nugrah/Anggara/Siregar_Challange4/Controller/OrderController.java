@@ -3,15 +3,18 @@ package com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Controller;
 
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderRequestDto;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Dto.OrderResponseDto;
-import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.OrderDetail;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.Product;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Model.User;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.ProductRepository;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Repository.UserRepository;
+import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.InvoiceFacadeService;
 import com.example.BEJ1_SYNERGY._Nugrah.Anggara.Siregar_Challange4.Service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -30,6 +33,9 @@ public class OrderController {
     private UserRepository userRepository;
 
     @Autowired
+    private InvoiceFacadeService invoiceFacadeService;
+
+    @Autowired
     ProductRepository productRepository;
 
     @PostMapping(value = "/add")
@@ -42,8 +48,29 @@ public class OrderController {
     }
 
     @GetMapping(path = "/detail/{id}")
-    List<OrderDetail> getOrder(@PathVariable String id){
-        return orderService.getOrderDetail(id);
+    ResponseEntity<Object> getOrder(@PathVariable String id){
+        return new ResponseEntity<>(orderService.getOrderDetail(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/generate/{idUser}/{idOrder}")
+    public ResponseEntity<Resource> generateInvoice(
+            @PathVariable("idUser") String idUser,
+            @PathVariable("idOrder") String idOrder){
+
+        byte[] invoiceContent = invoiceFacadeService.generateInvoiceService(UUID.fromString(idUser),UUID.fromString(idOrder));
+
+        ByteArrayResource resource = new ByteArrayResource(invoiceContent);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .contentLength(resource.contentLength())
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        ContentDisposition.attachment()
+                                .filename("invoice binarfud.pdf")
+                                .build()
+                                .toString())
+                .body(resource);
+
     }
 
 }
